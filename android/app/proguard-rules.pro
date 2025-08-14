@@ -1,0 +1,3 @@
+-keep class io.flutter.** { *; }
+-keep class kotlin.Metadata { *; }
+-dontwarn java.nio.file.*
