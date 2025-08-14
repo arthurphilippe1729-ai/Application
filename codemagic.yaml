@@ -1,0 +1,24 @@
+yaml
+workflows:
+  android_release:
+    name: Android Release (Java 17)
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+      vars:
+        ANDROID_FIREBASE_CLI_LOGIN: "false"
+    scripts:
+      - name: Flutter clean & pub get
+        script: |
+          flutter clean
+          flutter pub get
+      - name: Build Android appbundle
+        script: |
+          flutter build appbundle --release
+    artifacts:
+      - build/app/outputs/**/*.aab
+    publishing:
+      email:
+        recipients:
+          - ${CM_BUILD_EMAIL}
